@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{head|safe}}
+
+<body>
+    {{nav|safe}}
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <div class="mx-auto text-center">
+            <h2>Welcome! いらっしゃいませ!</h2>
+            <hr class="hr" />
+            <img src="{{url_for('static', filename='logo.png')}}" class="rounded mx-auto d-block" style="max-height: 250px" alt="">
+        </div>
+        <div class="card">
+            <div class="card-body p-4">
+                <h4>Leaderboard</h4>
+                <div class="me-auto">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Place</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Average Score</th>
+                            <th scope="col">Quiz Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for rank in ranks %}
+                            <tr>
+                            <th scope="row">{{rank.place}}</th>
+                            <td>{{rank.user_name}}</td>
+                            <td>{{rank.average_score}}</td>
+                            <td>{{rank.count_quizzes}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </br>
+        <div class="card">
+            <div class="card-body p-4">
+                <h4>Available Quizzes</h4>
+                <div class="me-auto">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quiz in quizzes %}
+                            <tr>
+                            <th scope="row">{{quiz.title}}</th>
+                            <td>{{quiz.level}}</td>
+                            {% if user_logged_in %}
+                            <td>
+                                <select class="form-select" id="questionLanguage">
+                                    <option value="english" selected>English</option>
+                                    <option value="romanji">Romanji</option>
+                                    <option value="hiragana">Hiragana</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-select" id="answerLanguage">
+                                    <option value="english">English</option>
+                                    <option value="romanji">Romanji</option>
+                                    <option value="hiragana" selected>Hiragana</option>
+                                </select>
+                            </td>
+                            <td><button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="launchQuiz('{{quiz.link}}')">Start</button></td>
+                            {% else %}
+                            <td>-</td>
+                            <td>-</td>
+                            <td><a class="btn btn-secondary" href="{{base_url}}/login" role="button" onclick="$('#loginToast').toast('show');">Log In</a></td>
+                            {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+{{foot|safe}}
+
+<script>
+ function launchQuiz(quiz_link) {
+    var ql = (document.getElementById('questionLanguage')).value;
+    var al = (document.getElementById('answerLanguage')).value;
+    if (ql == al) {
+        alert("Please select different question and answer languages!")
+    }
+    else {
+        window.location = `${quiz_link}?question_language=${ql}&answer_language=${al}`;
+    }
+ }
+</script>
+</html>

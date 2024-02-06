@@ -1,0 +1,79 @@
+{
+    "id": "83e59f78-eb9b-4cab-900a-4bc3880036d8",
+    "title": "Months",
+    "level": 2,
+    "questions": [
+        {
+            "id": 1,
+            "english": ["January"],
+            "romanji": ["Ichi gatsu"],
+            "hiragana": ["いち がつ"]
+        },
+        {
+            "id": 2,
+            "english": ["February"],
+            "romanji": ["Ni gatsu"],
+            "hiragana": ["に がつ"]
+        },
+        {
+            "id": 3,
+            "english": ["March"],
+            "romanji": ["San gatsu"],
+            "hiragana": ["さん がつ"]
+        },
+        {
+            "id": 4,
+            "english": ["April"],
+            "romanji": ["Shi gatsu"],
+            "hiragana": ["し がつ"]
+        },
+        {
+            "id": 5,
+            "english": ["May"],
+            "romanji": ["Go gatsu"],
+            "hiragana": ["ご がつ"]
+        },
+        {
+            "id": 6,
+            "english": ["June"],
+            "romanji": ["Roku gatsu"],
+            "hiragana": ["ろく がつ"]
+        },
+        {
+            "id": 7,
+            "english": ["July"],
+            "romanji": ["Shichi gatsu", "Nana gatsu"],
+            "hiragana": ["しち がつ","なな がつ"]
+        },
+        {
+            "id": 8,
+            "english": ["August"],
+            "romanji": ["Hachi gatsu"],
+            "hiragana": ["はち がつ"]
+        },
+        {
+            "id": 9,
+            "english": ["September"],
+            "romanji": ["Ku gatsu"],
+            "hiragana": ["く がつ"]
+        },
+        {
+            "id": 10,
+            "english": ["October"],
+            "romanji": ["Jyuu gatsu", "Juu gatsu"],
+            "hiragana": ["じゅう がつ"]
+        },
+        {
+            "id": 11,
+            "english": ["November"],
+            "romanji": ["Jyuuichi gatsu", "Juuichi gatsu"],
+            "hiragana": ["じゅういち がつ"]
+        },
+        {
+            "id": 12,
+            "english": ["December"],
+            "romanji": ["Jyuuni gatsu", "Juuni gatsu"],
+            "hiragana": ["じゅうに がつ"]
+        }
+    ]
+}

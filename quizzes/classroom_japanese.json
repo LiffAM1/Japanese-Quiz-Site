@@ -1,0 +1,151 @@
+{
+    "id": "b8025238-8c64-4557-bcdc-04994cc443d0",
+    "title": "Classroom Japanese",
+    "level": 1,
+    "questions": [
+        {
+            "id": 1,
+            "english": ["Japanese language"],
+            "romanji": ["Nihongo"],
+            "hiragana": ["にほんご"]
+        },
+        {
+            "id": 2,
+            "english": ["English language"],
+            "romanji": ["Eigo"],
+            "hiragana": ["えいご"]
+        },
+        {
+            "id": 3,
+            "english": ["Yes"],
+            "romanji": ["Hai"],
+            "hiragana": ["はい"]
+        },
+        {
+            "id": 4,
+            "english": ["No"],
+            "romanji": ["Iie"],
+            "hiragana": ["いいえ"]
+        },
+        {
+            "id": 5,
+            "english": ["Teacher"],
+            "romanji": ["Sensei"],
+            "hiragana": ["せんせい"]
+        },
+        {
+            "id": 6,
+            "english": ["Mr/Mrs (suffix)"],
+            "romanji": ["San"],
+            "hiragana": ["さん"]
+        },
+        {
+            "id": 7,
+            "english": ["Everyone"],
+            "romanji": ["Mina san"],
+            "hiragana": ["みな さん"]
+        },
+        {
+            "id": 8,
+            "english": ["Textbook"],
+            "romanji": ["Kyoukasho"],
+            "hiragana": ["きょうかしょ"]
+        },
+        {
+            "id": 9,
+            "english": ["Please stand (less formal)"],
+            "romanji": ["Tatte kudasai"],
+            "hiragana": ["たって ください"]
+        },
+        {
+            "id": 10,
+            "english": ["Please stand (more formal)"],
+            "romanji": ["Kiritsu"],
+            "hiragana": ["きりつ"]
+        },
+        {
+            "id": 11,
+            "english": ["Stand up straight"],
+            "romanji": ["Ki wo tsuke"],
+            "hiragana": ["き を つけ"]
+        },
+        {
+            "id": 12,
+            "english": ["Bow"],
+            "romanji": ["Rei"],
+            "hiragana": ["れい"]
+        },
+        {
+            "id": 13,
+            "english": ["Please sit (less formal)"],
+            "romanji": ["Suwatte kudasai"],
+            "hiragana": ["すわって ください"]
+        },
+        {
+            "id": 14,
+            "english": ["Please sit (more formal)"],
+            "romanji": ["Chakuseki"],
+            "hiragana": ["ちゃくせき"]
+        },
+        {
+            "id": 15,
+            "english": ["Please look"],
+            "romanji": ["Mite kudasai"],
+            "hiragana": ["みて ください"]
+        },
+        {
+            "id": 16,
+            "english": ["Please listen"],
+            "romanji": ["Kiite kudasai"],
+            "hiragana": ["きいて ください"]
+        },
+        {
+            "id": 17,
+            "english": ["Please speak"],
+            "romanji": ["Itte kudasai"],
+            "hiragana": ["いって ください"]
+        },
+        {
+            "id": 18,
+            "english": ["Please write"],
+            "romanji": ["Kaite kudasai"],
+            "hiragana": ["かいて ください"]
+        },
+        {
+            "id": 19,
+            "english": ["Please read"],
+            "romanji": ["Yonde kudasai"],
+            "hiragana": ["よんで ください"]
+        },
+        {
+            "id": 20,
+            "english": ["I have a question"],
+            "romanji": ["Shitsumon ga arimasu"],
+            "hiragana": ["しつもん が あります"]
+        },
+        {
+            "id": 21,
+            "english": ["Do you have a question?"],
+            "romanji": ["Shitsumon ga arimasu ka"],
+            "hiragana": ["しつもん が あります か"]
+        },
+        {
+            "id": 22,
+            "english": ["What is ___ in Japanese?"],
+            "romanji": ["___ wa Nihongo de nan desu ka"],
+            "hiragana": ["___ は にほんご で なん です か"]
+        },
+        {
+            "id": 23,
+            "english": ["What is ___ in English?"],
+            "romanji": ["___ wa Eigo de nan desu ka"],
+            "hiragana": ["____ は えいご で なん です か"]
+        },
+        {
+            "id": 24,
+            "english": ["Do you understand?"],
+            "romanji": ["Wakarimasu ka"],
+            "hiragana": ["わかります か"]
+        }
+    ]
+}

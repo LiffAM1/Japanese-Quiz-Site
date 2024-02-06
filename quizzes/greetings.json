@@ -1,0 +1,61 @@
+{
+    "id": "ae29ce78-29f2-44ea-910d-4d7cb765e62c",
+    "title": "Greetings",
+    "level": 1,
+    "questions": [
+        {
+            "id": 1,
+            "english": ["Good morning"],
+            "romanji": ["Ohayou gozaimasu"],
+            "hiragana": ["おはよう ございます"]
+        },
+        {
+            "id": 2,
+            "english": ["Good afternoon", "Hello"],
+            "romanji": ["Konnichiwa"],
+            "hiragana": ["こんにちは"]
+        },
+        {
+            "id": 3,
+            "english": ["Good evening"],
+            "romanji": ["Konbanwa"],
+            "hiragana": ["こんばんは"]
+        },
+        {
+            "id": 4,
+            "english": ["Goodbye"],
+            "romanji": ["Sayounara"],
+            "hiragana": ["さようなら"]
+        },
+        {
+            "id": 5,
+            "english": ["Thank you very much"],
+            "romanji": ["Arigatou gozaimasu"],
+            "hiragana": ["ありがとう ございます"]
+        },
+        {
+            "id": 6,
+            "english": ["You're welcome", "My pleasure"],
+            "romanji": ["Dou itashimashite"],
+            "hiragana": ["どう いたしまして"]
+        },
+        {
+            "id": 7,
+            "english": ["Excuse me", "Pardon me"],
+            "romanji": ["Sumimasen"],
+            "hiragana": ["すみません"]
+        },
+        {
+            "id": 8,
+            "english": ["I'm sorry"],
+            "romanji": ["Gomennasai"],
+            "hiragana": ["ごめんなさい"]
+        },
+        {
+            "id": 9,
+            "english": ["No problem"],
+            "romanji": ["Iie"],
+            "hiragana": ["いいえ"]
+        }
+    ]
+}

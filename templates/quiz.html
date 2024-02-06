@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{head|safe}}
+
+<body>
+    {{nav|safe}}
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <div class="mx-auto text-center" id="quizInfo">
+            <h2>{{quiz.title}}</h2>
+            <p>{{question_language.capitalize()}} to {{answer_language.capitalize()}}</p>
+            <p>Level {{quiz.level}} Quiz</p>
+            <hr class="hr" />
+        </div>
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="me-auto">
+                    <form>
+                        {% for q in quiz.questions %}
+                        <div class="form-group" id="{{q.id}}">
+                            <label for="{{q.id}}-input" id="{{q.id}}-label"><b>{{q.question}}</b></label>
+                            <input type="text" class="form-control" id="{{q.id}}-input" placeholder="Type your response here">
+                        </div>
+                        </br>
+                        {% endfor %}
+                    </form>
+                    <button type="button" class="btn btn-secondary" id="submitBtn" onClick="submit()">Submit Quiz</button>
+                    <a href="{{base_url}}/quiz/{{quiz_id}}?question_language={{question_language}}&answer_language={{answer_language}}" class="btn btn-secondary" role="button" hidden="true" id="retakeBtn">Retake</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div class="toast align-items-center bg-secondary fade hide" role="alert" aria-live="assertive" aria-atomic="true" id="scoringToast">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Scoring Quiz...
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</body>
+{{foot|safe}}
+
+<script>
+  var quiz_question_ids = {{quiz_question_ids | safe}};
+  var quiz_id = "{{quiz_id | safe}}";
+  var base_url = "{{base_url | safe}}";
+  var question_language = "{{question_language | safe}}";
+  var answer_language = "{{answer_language | safe}}";
+
+  async function submit() {
+    $('#scoringToast').toast('show');
+    var submitBtnEl = (document.getElementById("submitBtn"));
+    submitBtnEl.disabled = true;
+
+    var responses = {};
+    for (let i = 0; i < quiz_question_ids.length; i++) {
+        var question = quiz_question_ids[i];
+        var questionGroupEl = (document.getElementById(question))
+        var inputEl = (document.getElementById(question + "-input"));
+        var answer = inputEl.value;
+        var userAnswer = '<p>Your response: ' + answer + '</p>';
+        inputEl.remove();
+        questionGroupEl.innerHTML += userAnswer;
+        var response = {
+            id: question,
+            answer: answer
+        };
+        responses[question] = response;
+    }
+    var request = {
+        'question_language': question_language,
+        'answer_language': answer_language,
+        'responses': responses
+    }
+
+    const postResponse = await $.ajax(base_url + "/quiz/" + quiz_id + "/submit", {
+      data: JSON.stringify(request),
+      contentType: 'application/json',
+      type: 'POST'
+    }).then(data => {
+        var response = JSON.parse(data)
+        var retakeBtn = (document.getElementById('retakeBtn'));
+        submitBtnEl.hidden = true;
+        retakeBtn.hidden = false;
+        var quizHeaderEl = (document.getElementById("quizInfo"));
+        quizHeaderEl.innerHTML += '<p>Score: ' + response.score + '</p>';
+        quizHeaderEl.innerHTML += '</hr>';
+
+        for (let i = 0; i < response.results.length; i++) {
+            var result = response.results[i];
+            var questionGroupEl = (document.getElementById(result.question_id));
+            var labelEl = (document.getElementById(result.question_id + '-label'));
+            var correctIcon = ' <i class="fa fa-check" aria-hidden="true" style="color:LightGreen"></i>';
+            var incorrectIcon = ' <i class="fa fa-xmark" aria-hidden="true" style="color:IndianRed"></i>';
+            var incorrectAnswers = '<p>Correct answers: ' + result.answers + '</p>';
+            if (result.correct) {
+                labelEl.innerHTML += correctIcon;
+            } else {
+                labelEl.innerHTML += incorrectIcon;
+                questionGroupEl.innerHTML += incorrectAnswers;
+            }
+        }
+    });
+  }
+</script>
+</html>

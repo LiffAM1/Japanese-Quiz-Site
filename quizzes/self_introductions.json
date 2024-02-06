@@ -1,0 +1,61 @@
+{
+    "id": "e8f074c1-b6e5-4011-82d7-9310f0589a03",
+    "title": "Self Introductions",
+    "level": 1,
+    "questions": [
+        {
+            "id": 1,
+            "english": ["Nice to meet you (beginning)"],
+            "romanji": ["Hajimemashite"],
+            "hiragana": ["はじめまして"]
+        },
+        {
+            "id": 2,
+            "english": ["Nice to meet you (end)"],
+            "romanji": ["Douzo yoroshiku onegai shimasu"],
+            "hiragana": ["どうぞ よろしく おねがい します"]
+        },
+        {
+            "id": 3,
+            "english": ["I am ___ ___ (last name, first name)"],
+            "romanji": ["Watashi wa ___ ___ desu"],
+            "hiragana": ["わたし は ___ ___ です"]
+        },
+        {
+            "id": 4,
+            "english": ["I am American"],
+            "romanji": ["Amerika jin desu"],
+            "hiragana": ["あめりか じん です"]
+        },
+        {
+            "id": 5,
+            "english": ["My hometown is ___"],
+            "romanji": ["Shusshin wa ___ desu"],
+            "hiragana": ["しゅっしん は ___ です"]
+        },
+        {
+            "id": 6,
+            "english": ["My job is ___"],
+            "romanji": ["Shigoto wa ___ desu"],
+            "hiragana": ["しごと は ___ です"]
+        },
+        {
+            "id": 7,
+            "english": ["My hobby is ___"],
+            "romanji": ["Shumi wa ___ desu"],
+            "hiragana": ["しゅみ は ___ です"]
+        },
+        {
+            "id": 8,
+            "english": ["My family is ___"],
+            "romanji": ["Kazoku wa ___ desu"],
+            "hiragana": ["かぞく は ___ です"]
+        },
+        {
+            "id": 9,
+            "english": ["Self introduction"],
+            "romanji": ["Jikoshyoukai"],
+            "hiragana": ["じこしょうかい"]
+        }
+    ]
+}

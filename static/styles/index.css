@@ -1,0 +1,9 @@
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+main {
+  padding-bottom: 20px;
+  min-height: 100vh;
+}

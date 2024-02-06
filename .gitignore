@@ -1,0 +1,8 @@
+venv/
+python/
+__pycache__/
+Lib/
+node_modules/
+Scripts/
+Include/
+*.cfg
