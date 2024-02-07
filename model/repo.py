@@ -3,6 +3,7 @@ import time
 import json
 import firebase_admin
 from firebase_admin import firestore
+from google.cloud.firestore_v1.base_query import FieldFilter
 from model.models import *
 
 class FirestoreRepo:
@@ -13,7 +14,7 @@ class FirestoreRepo:
         self.collection = self.db.collection(collection)
 
     def query(self, field, operation, val): 
-        docs = self.collection.where(field, operation, val)
+        docs = self.collection.where(filter=FieldFilter(field, operation, val)).stream()
         return [doc.to_dict() for doc in docs]
 
     def get(self, filename): 

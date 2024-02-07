@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{head|safe}}
+
+<body>
+    {{nav|safe}}
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <div class="mx-auto text-center">
+            <h2>{{user.name}}</h2>
+            <hr class="hr" />
+            <p><b>Quiz Count:</b> {{user.count_quizzes}}</p>
+            <p><b>Average Score:</b> {{user.average_score*100}}%</p>
+            <hr class="hr" />
+        </div>
+        <div class="card">
+            <div class="card-body p-4">
+                <h4>Quiz History</h4>
+                <div class="me-auto">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for attempt in attempts %}
+                            <tr>
+                            <td>{{attempt.date}}</td>
+                            <td>{{attempt.quiz_title}}</td>
+                            <td>{{attempt.question_language.capitalize()}}</td>
+                            <td>{{attempt.answer_language.capitalize()}}</td>
+                            <td>{{attempt.score*100}}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+{{foot|safe}}
+</html>

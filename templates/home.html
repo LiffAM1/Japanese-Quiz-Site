@@ -61,23 +61,23 @@
                             <td>{{quiz.level}}</td>
                             {% if user_logged_in %}
                             <td>
-                                <select class="form-select" id="questionLanguage">
+                                <select class="form-select" id="questionLanguage-{{quiz.id}}">
                                     <option value="english" selected>English</option>
                                     <option value="romanji">Romanji</option>
                                     <option value="hiragana">Hiragana</option>
                                 </select>
                             </td>
                             <td>
-                                <select class="form-select" id="answerLanguage">
+                                <select class="form-select" id="answerLanguage-{{quiz.id}}">
                                     <option value="english">English</option>
                                     <option value="romanji">Romanji</option>
                                     <option value="hiragana" selected>Hiragana</option>
                                 </select>
                             </td>
-                            <td><button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="launchQuiz('{{quiz.link}}')">Start</button></td>
+                            <td><button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="launchQuiz('{{quiz.link}}','{{quiz.id}}')">Start</button></td>
                             {% else %}
-                            <td>-</td>
-                            <td>-</td>
+                            <td title="Please log in to take quizzes!">-</td>
+                            <td title="Please log in to take quizzes!">-</td>
                             <td><a class="btn btn-secondary" href="{{base_url}}/login" role="button" onclick="$('#loginToast').toast('show');">Log In</a></td>
                             {% endif %}
                             </tr>
@@ -92,9 +92,9 @@
 {{foot|safe}}
 
 <script>
- function launchQuiz(quiz_link) {
-    var ql = (document.getElementById('questionLanguage')).value;
-    var al = (document.getElementById('answerLanguage')).value;
+ function launchQuiz(quiz_link, quiz_id) {
+    var ql = (document.getElementById('questionLanguage-' + quiz_id)).value;
+    var al = (document.getElementById('answerLanguage-' + quiz_id)).value;
     if (ql == al) {
         alert("Please select different question and answer languages!")
     }

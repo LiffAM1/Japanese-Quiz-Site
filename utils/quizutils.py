@@ -1,24 +1,31 @@
 import os
 from model.models import *
 
-BUCKET_BASE_NAME = os.environ.get("BUCKET_BASE_NAME", None)
-
 class QuizUtils:
     @staticmethod
     def score(user: User, quiz: Quiz, data: dict):
-        results = QuizAttempt(user.id, quiz.id, data['question_language'], data['answer_language'], 0, {})
+        results = QuizAttempt(user.id, quiz.id, quiz.title, data['question_language'], data['answer_language'], 0, {})
         response_data = data['responses']
         user_answers = {}
         total_correct = 0
         for (id, question) in quiz.questions.items():
             response = response_data[str(id)]
             answers = question.get_answers(data['answer_language'])
-            correct = response['answer'].strip().lower().replace("_", "") in [a.lower().replace("_", "") for a in answers]
+            correct = QuizUtils.format_question_answer(response['answer']) in [QuizUtils.format_question_answer(a) for a in answers]
             user_answers[id] = QuizResponse(id, question.get_question(data['question_language']), answers, response['answer'], correct)
             total_correct = total_correct + 1 if correct else total_correct
         results.score = total_correct/len(quiz.questions)
         results.responses = user_answers
         return results
+
+    @staticmethod
+    def format_question_answer(string):
+        string = string.lower()
+
+        strings_to_replace = ["_", "(beginning)", "(end)"]
+        for s in strings_to_replace:
+            string = string.replace(s,"")
+        return string.strip()
 
     @staticmethod
     def calculate_average_score(user, results):

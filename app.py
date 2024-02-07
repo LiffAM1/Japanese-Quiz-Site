@@ -5,6 +5,7 @@ from flask import Flask, redirect, request, url_for, abort, make_response, rende
 from model.models import *
 from model.repo import * 
 from utils.quizutils import QuizUtils
+from utils.secretutils import SecretUtils
 from flask_cors import CORS
 
 from flask_login import (
@@ -23,9 +24,11 @@ CORS(app)
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 app.config["IMAGE_UPLOADS"] = "static"
 
+secret_util = SecretUtils()
+
 # Env setup
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_ID = secret_util.get_secret("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = secret_util.get_secret("GOOGLE_CLIENT_SECRET")
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration")
 BASE_URL = os.environ.get("BASE_URL", None)
@@ -33,6 +36,7 @@ BASE_URL = os.environ.get("BASE_URL", None)
 users_repo = UsersRepo()
 quizzes_repo = QuizzesRepo()
 quiz_attempts_repo = QuizAttemptsRepo()
+
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 login_manager = LoginManager()
@@ -150,8 +154,8 @@ def home():
 @login_required
 def user_profile():
     user = load_user(current_user.id)
-    quiz_history = quiz_attempts_repo.get_all_for_user(user.id)
-    return render_template('profile.html', quiz_history=quiz_history, nav=get_nav(), foot=get_foot())
+    attempts = quiz_attempts_repo.get_all_for_user(user.id)
+    return render_template('profile.html', user=user, attempts=attempts, nav=get_nav(), head=get_head(), foot=get_foot())
 
 @app.route("/quiz/<quiz_id>")
 def quiz(quiz_id):
@@ -227,6 +231,7 @@ def links():
 def format_percent(n):
     return "{:.2f}%".format(n*100)
 
+# Janky templating ¯\_(ツ)_/¯
 def get_nav():
     user_logged_in = (current_user and current_user.is_active)
 

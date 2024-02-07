@@ -1,14 +1,8 @@
 import os
 import random
+from datetime import datetime 
 
 BASE_URL = os.environ.get("BASE_URL", None)
-
-class ModelUtils:
-    @staticmethod
-    def get_dict_list(raw_list):
-        if type(raw_list) is tuple:
-            return list(raw_list)[0]
-        return raw_list
 
 class User:
     def __init__(self, id: str, name: str, email: str, average_score: float, count_quizzes: int, is_active: bool, is_authenticated: bool):
@@ -46,7 +40,7 @@ class Quiz:
     @staticmethod
     def from_dict(dict: dict):
         return Quiz(dict['id'], dict['title'], dict['level'], \
-            {qq.id: qq for qq in [QuizQuestion.from_dict(q) for q in ModelUtils.get_dict_list(dict['questions'])]})
+            {qq.id: qq for qq in [QuizQuestion.from_dict(q) for q in dict['questions']]})
 
     def get_quiz_view(self, question_language: str):
         view = {
@@ -86,9 +80,9 @@ class QuizQuestion:
     def from_dict(dict: dict):
         return QuizQuestion(
             dict['id'],
-            ModelUtils.get_dict_list(dict['english']),
-            ModelUtils.get_dict_list(dict['romanji']),
-            ModelUtils.get_dict_list(dict['hiragana']))
+            dict['english'],
+            dict['romanji'],
+            dict['hiragana'])
 
     def get_question(self, question_language: str):
         match question_language:
@@ -114,9 +108,11 @@ class QuizQuestion:
 
 
 class QuizAttempt:
-    def __init__(self, user_id: str, quiz_id: str, question_language: str, answer_language: str, score: float, responses: dict):
+    def __init__(self, user_id: str, quiz_id: str, quiz_title: str, question_language: str, answer_language: str, score: float, responses: dict, date: str = None):
         self.user_id = user_id
         self.quiz_id = quiz_id
+        self.quiz_title = quiz_title 
+        self.date = date if date else datetime.today().strftime("%d/%m/%Y %H:%M:%S")
         self.question_language = question_language
         self.answer_language = answer_language
         self.score = score
@@ -124,7 +120,7 @@ class QuizAttempt:
 
     @staticmethod
     def from_dict(dict: dict):
-        return QuizAttempt(dict['user_id'], dict['quiz_id'], dict['question_language'], dict['answer_language'], dict['score'], {uq.id: uq for uq in [QuizResponse.from_dict(q) for q in ModelUtils.get_dict_list(dict['responses'])]})
+        return QuizAttempt(dict['user_id'], dict['quiz_id'], dict['quiz_title'], dict['question_language'], dict['answer_language'], dict['score'], {uq.question_id: uq for uq in [QuizResponse.from_dict(q) for q in dict['questions'].values()]}, dict['date'])
 
     def get_results(self):
         return [qq.get_result() for qq in self.responses.values()]
@@ -133,6 +129,8 @@ class QuizAttempt:
         return {
             'user_id': self.user_id,
             'quiz_id': self.quiz_id,
+            'quiz_title': self.quiz_title,
+            'date': self.date,
             'question_language': self.question_language,
             'answer_language': self.answer_language,
             'score': self.score,
@@ -149,7 +147,7 @@ class QuizResponse:
 
     @staticmethod
     def from_dict(dict: dict):
-        return QuizResponse(dict['question_id'], dict['question'], dict['answer'], dict['user_answer'], dict['correct'])
+        return QuizResponse(dict['question_id'], dict['question'], dict['answers'], dict['user_answer'], dict['correct'])
 
     def get_result(self):
         data = self.to_dict()
