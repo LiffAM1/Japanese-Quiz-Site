@@ -1,0 +1,11 @@
+runtime: python312
+
+env_variables:
+  BASE_URL: "https://jce-quizzes.com"
+
+handlers:
+  - url: /.*
+    script: auto
+
+  - url: /static
+    static_dir: static

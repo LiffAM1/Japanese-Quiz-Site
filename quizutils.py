@@ -1,5 +1,5 @@
 import os
-from model.models import *
+from models import *
 
 class QuizUtils:
     @staticmethod

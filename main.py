@@ -2,10 +2,10 @@ import json
 import os
 import transaction
 from flask import Flask, redirect, request, url_for, abort, make_response, render_template
-from model.models import *
-from model.repo import * 
-from utils.quizutils import QuizUtils
-from utils.secretutils import SecretUtils
+from models import *
+from repo import * 
+from quizutils import QuizUtils
+from secretutils import SecretUtils
 from flask_cors import CORS
 
 from flask_login import (
@@ -292,7 +292,7 @@ def get_head():
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="{url_for('static',filename='styles/index.css')}">
+        <link rel="stylesheet" type="text/css" href="{url_for('static',filename='index.css')}">
         <title>JCE Class Study Resource Portal</title>
     </head>
     """
@@ -305,4 +305,4 @@ def get_foot():
     """
 
 if __name__ == "__main__":
-    app.run(ssl_context=('adhoc'))
+    app.run(host="127.0.0.1", port=8080, debug=True)

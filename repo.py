@@ -4,7 +4,7 @@ import json
 import firebase_admin
 from firebase_admin import firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
-from model.models import *
+from models import *
 
 class FirestoreRepo:
     def __init__(self, collection):  
@@ -81,7 +81,7 @@ class QuizAttemptsRepo(FirestoreRepo):
 class QuizzesRepo(FirestoreRepo):
     def __init__(self):
         super().__init__("quizzes")
-        self.seed()
+        #self.seed()
 
     def get(self, quiz_id: str):
         quiz = super().get(quiz_id)
