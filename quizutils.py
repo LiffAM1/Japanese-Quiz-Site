@@ -37,5 +37,9 @@ class QuizUtils:
         place = 0
         users.sort(key=lambda u: u.average_score*u.count_quizzes, reverse=True)
         leaderboard_results = \
-            {u.id: LeaderboardRank(i, u.id, u.name, u.count_quizzes, u.average_score) for i, u in enumerate(users, 1)}
+            {u.id: LeaderboardRank(i, u.id, u.display_name, u.count_quizzes, u.average_score) for i, u in enumerate(users, 1)}
         return leaderboard_results
+
+    @staticmethod
+    def format_percent(n):
+        return "{:.2f}%".format(n*100)

@@ -8,12 +8,21 @@
     <main role="main" class="container">
       <div class="jumbotron">
         <div class="mx-auto text-center">
-            <h2>{{user.name}}</h2>
-            <hr class="hr" />
-            <p><b>Quiz Count:</b> {{user.count_quizzes}}</p>
-            <p><b>Average Score:</b> {{user.average_score*100}}%</p>
-            <hr class="hr" />
+            <h2 id="userName">{{user.display_name}}</h2>
         </div>
+        <hr class="hr" />
+        <div class="card">
+            <div class="card-body p-4">
+                <ul class="list-group">
+                    <li class="list-group-item"><b>Name:</b> {{user.name}}</li>
+                    <li class="list-group-item"><b>Email:</b> {{user.email}}</li>
+                    <li class="list-group-item"><b>Quiz Count:</b> {{user.count_quizzes}}</li>
+                    <li class="list-group-item"><b>Average Score:</b> {{user.average_score}}</li>
+                    <li class="list-group-item"><b>Display Name:</b> <input type="text" id="displayName" placeholder="{{user.display_name}}"><button type="button" class="btn btn-secondary" id="submitBtn" onClick="saveDisplayName()">Save</button></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="hr" />
         <div class="card">
             <div class="card-body p-4">
                 <h4>Quiz History</h4>
@@ -35,7 +44,7 @@
                             <td>{{attempt.quiz_title}}</td>
                             <td>{{attempt.question_language.capitalize()}}</td>
                             <td>{{attempt.answer_language.capitalize()}}</td>
-                            <td>{{attempt.score*100}}%</td>
+                            <td>{{attempt.score}}<td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -47,3 +56,21 @@
 </body>
 {{foot|safe}}
 </html>
+<script>
+
+var base_url = "{{base_url | safe}}";
+
+async function saveDisplayName() {
+    var new_name = (document.getElementById("displayName")).value;
+    var request = { 'display_name': new_name };
+
+    const postResponse = await $.ajax(base_url + "/user/display_name", {
+      data: JSON.stringify(request),
+      contentType: 'application/json',
+      type: 'POST'
+    }).then(data => {
+        var header = (document.getElementById("userName"));
+        header.innerHTML = new_name;
+    });
+ }
+</script>

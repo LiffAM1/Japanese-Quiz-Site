@@ -1,14 +1,16 @@
 import os
 import random
 from datetime import datetime 
+from miscutils import MiscUtils
 
 BASE_URL = os.environ.get("BASE_URL", None)
 
 class User:
-    def __init__(self, id: str, name: str, email: str, average_score: float, count_quizzes: int, is_active: bool, is_authenticated: bool):
+    def __init__(self, id: str, name: str, display_name: str, email: str, average_score: float, count_quizzes: int, is_active: bool, is_authenticated: bool):
         self.id = id
         self.name = name
         self.email = email
+        self.display_name = display_name
         self.average_score = average_score
         self.count_quizzes = count_quizzes
         self.is_active = is_active
@@ -19,11 +21,16 @@ class User:
     
     @staticmethod
     def from_dict(dict: dict):
-        return User(dict['id'], dict['name'], dict['email'], dict['average_score'], \
+        return User(dict['id'], dict['name'], dict['display_name'], dict['email'], dict['average_score'], \
             dict['count_quizzes'], dict['is_active'], dict['is_authenticated'])
 
     def to_dict(self):
         return self.__dict__
+
+    def to_display_dict(self):
+        user = self.to_dict()
+        user['average_score'] = MiscUtils.format_percent(self.average_score)
+        return user
 
 class Quiz:
     def __init__(self, id: str, title: str, level: str, questions: dict):
@@ -136,6 +143,12 @@ class QuizAttempt:
             'score': self.score,
             'questions': {k: q.to_dict() for k,q in self.responses.items()}
         }
+
+    def to_display_dict(self):
+        quizAttempt = self.to_dict()
+        quizAttempt['score'] = MiscUtils.format_percent(self.score)
+        return quizAttempt
+
 
 class QuizResponse:
     def __init__(self, question_id: str, question: str, answers: list, user_answer: str, correct: bool):

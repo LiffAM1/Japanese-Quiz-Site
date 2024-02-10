@@ -50,6 +50,12 @@ class UsersRepo(FirestoreRepo):
         data = user.to_dict()
         super().save(user.id, data)
 
+    def set_display_name(self, user_id, display_name):
+        user = self.get(user_id)
+        if user:
+            user.display_name = display_name
+            self.save(user)
+
     def set_active(self, user_id: str):
         user = self.get(user_id)
         if user:

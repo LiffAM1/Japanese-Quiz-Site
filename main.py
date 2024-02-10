@@ -6,6 +6,7 @@ from models import *
 from repo import * 
 from quizutils import QuizUtils
 from secretutils import SecretUtils
+from miscutils import MiscUtils
 from flask_cors import CORS
 
 from flask_login import (
@@ -117,7 +118,7 @@ def callback():
 
     user = users_repo.get(unique_id)
     if not user:
-        user = User(id=unique_id, name=users_name, email=users_email, is_active=True, is_authenticated=True, average_score=0, count_quizzes=0)
+        user = User(id=unique_id, name=users_name, display_name=users_name, email=users_email, is_active=True, is_authenticated=True, average_score=0, count_quizzes=0)
         users_repo.save(user)
     else:
         users_repo.set_active(user.id)
@@ -135,7 +136,7 @@ def home():
     def format_leaderboard(leaderboard):
         for u in leaderboard:
             av_score = leaderboard[u].average_score
-            leaderboard[u].average_score = format_percent(av_score)
+            leaderboard[u].average_score = MiscUtils.format_percent(av_score)
         return leaderboard 
 
     try:
@@ -155,7 +156,7 @@ def home():
 def user_profile():
     user = load_user(current_user.id)
     attempts = quiz_attempts_repo.get_all_for_user(user.id)
-    return render_template('profile.html', user=user, attempts=attempts, nav=get_nav(), head=get_head(), foot=get_foot())
+    return render_template('profile.html', user=user.to_display_dict(), attempts=[a.to_display_dict() for a in attempts], base_url=BASE_URL, nav=get_nav(), head=get_head(), foot=get_foot())
 
 @app.route("/quiz/<quiz_id>")
 def quiz(quiz_id):
@@ -212,12 +213,25 @@ def quiz_submit(quiz_id):
         # Commit the changes and return
         response = {
             'results': attempt.get_results(),
-            'score': format_percent(attempt.score)
+            'score': MiscUtils.format_percent(attempt.score)
         }
         transaction.commit()
         return json.dumps(response, ensure_ascii=False)
     except Exception as e:
         transaction.abort()
+        return abort(500, str(e))
+
+@app.route('/user/display_name', methods=['POST'])
+@login_required
+def user_display_name():
+    try:
+        user = load_user(current_user.id)
+        data = request.get_json()
+
+        users_repo.set_display_name(user.id, data['display_name'])
+
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
+    except Exception as e:
         return abort(500, str(e))
 
 @app.route("/about")
@@ -228,8 +242,6 @@ def about():
 def links():
     return render_template('links.html', nav=get_nav(), head=get_head(), foot=get_foot())
 
-def format_percent(n):
-    return "{:.2f}%".format(n*100)
 
 # Janky templating ¯\_(ツ)_/¯
 def get_nav():
@@ -305,4 +317,4 @@ def get_foot():
     """
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    app.run(host="127.0.0.1", ssl_context=('adhoc'), port=8080, debug=True)
