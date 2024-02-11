@@ -11,7 +11,9 @@ class QuizUtils:
         for (id, question) in quiz.questions.items():
             response = response_data[str(id)]
             answers = question.get_answers(data['answer_language'])
-            correct = QuizUtils.format_question_answer(response['answer']) in [QuizUtils.format_question_answer(a) for a in answers]
+            formatted_response = QuizUtils.format_question_answer(response['answer'])
+            formatted_answers = [QuizUtils.format_question_answer(a) for a in answers]
+            correct = (formatted_response in formatted_answers) or (formatted_response == ("or").join(formatted_answers))
             user_answers[id] = QuizResponse(id, question.get_question(data['question_language']), answers, response['answer'], correct)
             total_correct = total_correct + 1 if correct else total_correct
         results.score = total_correct/len(quiz.questions)
