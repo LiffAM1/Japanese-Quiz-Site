@@ -11,7 +11,7 @@
         },
         {
             "id": 2,
-            "english": ["Good afternoon", "Hello"],
+            "english": ["Good afternoon", "Hello", "Hi"],
             "romanji": ["Konnichiwa"],
             "hiragana": ["こんにちは"]
         },
@@ -35,19 +35,19 @@
         },
         {
             "id": 6,
-            "english": ["You're welcome", "My pleasure"],
+            "english": ["You're welcome", "My pleasure", "No problem"],
             "romanji": ["Dou itashimashite"],
             "hiragana": ["どう いたしまして"]
         },
         {
             "id": 7,
-            "english": ["Excuse me", "Pardon me", "I'm sorry"],
+            "english": ["Excuse me", "Pardon me", "I'm sorry", "Sorry"],
             "romanji": ["Sumimasen"],
             "hiragana": ["すみません"]
         },
         {
             "id": 8,
-            "english": ["I'm sorry"],
+            "english": ["I'm sorry", "Sorry"],
             "romanji": ["Gomennasai"],
             "hiragana": ["ごめんなさい"]
         },

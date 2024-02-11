@@ -51,6 +51,11 @@ def load_user(user_id):
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
 
+@login_manager.unauthorized_handler
+def unauthorized():
+    # Redirect to login
+    return redirect("/login")
+
 # Google login logic
 @app.route("/login")
 def login():
@@ -139,17 +144,15 @@ def home():
             leaderboard[u].average_score = MiscUtils.format_percent(av_score)
         return leaderboard 
 
-    try:
-        # Calculate the leaderboard
-        all_users = users_repo.get_all()
-        leaderboard = QuizUtils.calculate_leaderboard(all_users)
+    all_users = users_repo.get_all()
+    # Only calculate leaderboard for users who have taken a quiz before
+    quiz_users = list(filter(lambda u: u.count_quizzes > 0, all_users))
+    leaderboard = QuizUtils.calculate_leaderboard(quiz_users)
 
-        # quizzes test
-        quizzes = quizzes_repo.get_all()
-        user_logged_in = (current_user and current_user.is_active)
-        return render_template('home.html', base_url=BASE_URL, user_logged_in=user_logged_in, ranks=list(format_leaderboard(leaderboard).values()), quizzes=quizzes, nav=get_nav(), head=get_head(), foot=get_foot())
-    except Exception as e:
-        return abort(500, str(e))
+    quizzes = quizzes_repo.get_all()
+    user_logged_in = (current_user and current_user.is_active)
+
+    return render_template('home.html', base_url=BASE_URL, user_logged_in=user_logged_in, ranks=list(format_leaderboard(leaderboard).values()), quizzes=quizzes, nav=get_nav(), head=get_head(), foot=get_foot())
 
 @app.route("/user/profile")
 @login_required

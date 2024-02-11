@@ -1,0 +1,97 @@
+{
+    "id": "d888c3bd-d80b-4d5d-9713-f9dcaaa190e3",
+    "title": "Dates and Holidays",
+    "level": 2,
+    "questions": [
+        {
+            "id": 1,
+            "english": ["Today is ___ ___", "Today is (month) (day)"],
+            "romanji": ["Kyou wa ___ ___ desu"],
+            "hiragana": ["きょう は ___ ___ です"]
+        },
+        {
+            "id": 2,
+            "english": ["Is today ___ ___?", "Is today (month) (day)?"],
+            "romanji": ["Kyou wa ___ ___ desu ka"],
+            "hiragana": ["きょう は ___ ___ です か"]
+        },
+        {
+            "id": 3,
+            "english": ["What is today's date?", "What month and day is today?"],
+            "romanji": ["Kyou wa nan gatsu nan nichi desu ka"],
+            "hiragana": ["きょう は なん がつ なん にち です か"]
+        },
+        {
+            "id": 4,
+            "english": ["New Year"],
+            "romanji": ["Oshougatsu"],
+            "hiragana": ["おしょうがつ"]
+        },
+        {
+            "id": 5,
+            "english": ["Spring festival"],
+            "romanji": ["Setsubun"],
+            "hiragana": ["せつぶん"]
+        },
+        {
+            "id": 6,
+            "english": ["National Foundation Day"],
+            "romanji": ["Kenkoku kinen no hi"],
+            "hiragana": ["けんこく きねん の ひ"]
+        },
+        {
+            "id": 7,
+            "english": ["Valentine's Day"],
+            "romanji": ["Barentain dee"],
+            "hiragana": ["ばれんたいん でえ"]
+        },
+        {
+            "id": 8,
+            "english": ["Doll's Day", "Girls' Day"],
+            "romanji": ["Hina matsuri"],
+            "hiragana": ["ひな まつり"]
+        },
+        {
+            "id": 9,
+            "english": ["White Day"],
+            "romanji": ["Howaito dee"],
+            "hiragana": ["ほわいと でえ"]
+        },
+        {
+            "id": 10,
+            "english": ["Children's Day"],
+            "romanji": ["Kodomo no hi"],
+            "hiragana": ["こども の ひ"]
+        },
+        {
+            "id": 11,
+            "english": ["Star Festival"],
+            "romanji": ["Tanabata"],
+            "hiragana": ["たなばた"]
+        },
+        {
+            "id": 12,
+            "english": ["Moon Festival"],
+            "romanji": ["Tsukimi"],
+            "hiragana": ["つきみ"]
+        },
+        {
+            "id": 13,
+            "english": ["Christmas"],
+            "romanji": ["Kurisumasu"],
+            "hiragana": ["くりすます"]
+        },
+        {
+            "id": 14,
+            "english": ["New Year's Eve"],
+            "romanji": ["Oomisoka"],
+            "hiragana": ["おおみそか"]
+        },
+        {
+            "id": 15,
+            "english": ["Birthday"],
+            "romanji": ["Tanjoubi"],
+            "hiragana": ["たんじょうび"]
+        }
+    ]
+}

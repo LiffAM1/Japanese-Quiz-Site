@@ -43,12 +43,11 @@
         <div class="card">
             <div class="card-body p-4">
                 <h4>Available Quizzes</h4>
-                <div class="me-auto">
+                <div class="me-auto table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                             <th scope="col">Title</th>
-                            <th scope="col">Level</th>
                             <th scope="col">Questions</th>
                             <th scope="col"></th>
                             </tr>
@@ -57,12 +56,11 @@
                             {% for quiz in quizzes %}
                             <tr>
                             <th scope="row">{{quiz.title}}</th>
-                            <td>{{quiz.level}}</td>
                             <td>{{quiz.questions|length}}</td>
                             {% if user_logged_in %}
                             <td><button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="showModal('{{quiz.title}}', '{{quiz.id}}')">Launch</button></td>
                             {% else %}
-                            <td><button type="button" class="btn btn-secondary" disabled="true" title="Please log in to take quizzes!">Launch</button></td>
+                            <td title="Please log in to take quizzes!"><button type="button" class="btn btn-secondary" disabled="true">Launch</button></td>
                             {% endif %}
                             </tr>
                             {% endfor %}
