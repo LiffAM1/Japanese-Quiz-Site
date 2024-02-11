@@ -60,7 +60,7 @@
                             {% if user_logged_in %}
                             <td><button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="showModal('{{quiz.title}}', '{{quiz.id}}')">Launch</button></td>
                             {% else %}
-                            <td title="Please log in to take quizzes!"><button type="button" class="btn btn-secondary" disabled="true">Launch</button></td>
+                            <td title="Please log in to take quizzes!"><a class="btn btn-secondary" href="{{base_url}}/login" role="button" onclick="$('#loginToast').toast('show');">Log In</a></td>
                             {% endif %}
                             </tr>
                             {% endfor %}
