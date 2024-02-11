@@ -19,6 +19,15 @@ class User:
 
     def get_id(self):
         return self.id
+
+    def is_authenticated(self):
+        return self.is_authenticated
+
+    def is_active(self):
+        return self.is_active
+
+    def is_anonymous(self):
+        return self.is_anonymous
     
     @staticmethod
     def from_dict(dict: dict):

@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 import os
 import transaction
 from flask import Flask, redirect, request, url_for, abort, make_response, render_template
@@ -15,6 +16,8 @@ from flask_login import (
     login_required,
     login_user,
     logout_user,
+    login_fresh,
+    login_remembered
 )
 
 from oauthlib.oauth2 import WebApplicationClient
@@ -24,6 +27,9 @@ app = Flask(__name__)
 CORS(app)
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 app.config["IMAGE_UPLOADS"] = "static"
+app.config["REMEMBER_COOKIE_REFRESH_EACH_REQUEST"] = True
+app.config["SESSION_REFRESH_EACH_REQUEST"] = True
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=1)
 
 secret_util = SecretUtils()
 
