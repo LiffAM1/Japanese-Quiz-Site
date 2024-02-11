@@ -16,6 +16,7 @@ from flask_login import (
     login_required,
     login_user,
     logout_user,
+    confirm_login,
     login_fresh,
     login_remembered
 )
@@ -25,13 +26,14 @@ import requests
 
 app = Flask(__name__)
 CORS(app)
-app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
+secret_util = SecretUtils()
+
+app.secret_key = secret_util.get_secret("SECRET_KEY") or os.urandom(24)
 app.config["IMAGE_UPLOADS"] = "static"
 app.config["REMEMBER_COOKIE_REFRESH_EACH_REQUEST"] = True
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=1)
 
-secret_util = SecretUtils()
 
 # Env setup
 GOOGLE_CLIENT_ID = secret_util.get_secret("GOOGLE_CLIENT_ID")
@@ -159,6 +161,8 @@ def home():
 
     quizzes = quizzes_repo.get_all()
     user_logged_in = (current_user and current_user.is_active)
+    if user_logged_in:
+        confirm_login()
 
     return render_template('home.html', base_url=BASE_URL, user_logged_in=user_logged_in, ranks=list(format_leaderboard(leaderboard).values()), quizzes=quizzes, nav=get_nav(), head=get_head(), foot=get_foot())
 
@@ -166,11 +170,14 @@ def home():
 @login_required
 def user_profile():
     user = load_user(current_user.id)
+    confirm_login()
     attempts = quiz_attempts_repo.get_all_for_user(user.id)
     return render_template('profile.html', user=user.to_display_dict(), attempts=[a.to_display_dict() for a in attempts], base_url=BASE_URL, nav=get_nav(), head=get_head(), foot=get_foot())
 
 @app.route("/quiz/<quiz_id>")
+@login_required
 def quiz(quiz_id):
+    confirm_login()
     try:
         question_language = request.args.get('question_language')
         answer_language = request.args.get('answer_language')
@@ -205,6 +212,7 @@ def quiz(quiz_id):
 @app.route('/quiz/<quiz_id>/submit', methods=['POST'])
 @login_required
 def quiz_submit(quiz_id):
+    confirm_login()
     try:
         user = load_user(current_user.id)
         data = request.get_json()
@@ -235,6 +243,7 @@ def quiz_submit(quiz_id):
 @app.route('/user/display_name', methods=['POST'])
 @login_required
 def user_display_name():
+    confirm_login()
     try:
         user = load_user(current_user.id)
         data = request.get_json()
@@ -247,10 +256,12 @@ def user_display_name():
 
 @app.route("/about")
 def about():
+    confirm_login()
     return render_template('about.html', nav=get_nav(), head=get_head(), foot=get_foot())
 
 @app.route("/links")
 def links():
+    confirm_login()
     return render_template('links.html', nav=get_nav(), head=get_head(), foot=get_foot())
 
 

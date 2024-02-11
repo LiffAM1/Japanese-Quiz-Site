@@ -2,10 +2,11 @@ import os
 import random
 from datetime import datetime 
 from miscutils import MiscUtils
+from flask_login import UserMixin
 
 BASE_URL = os.environ.get("BASE_URL", None)
 
-class User:
+class User(UserMixin):
     def __init__(self, id: str, name: str, display_name: str, email: str, average_score: float, count_quizzes: int, is_active: bool, is_authenticated: bool):
         self.id = id
         self.name = name
