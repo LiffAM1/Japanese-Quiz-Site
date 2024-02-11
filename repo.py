@@ -101,7 +101,7 @@ class QuizzesRepo(FirestoreRepo):
         data = quiz.to_dict()
         super().save(quiz.id, data)
 
-    # This re-seeds the quizzes to Firestore, keeping the same ID's
+    # This re-seeds the quizzes to Firestore keeping the same ID's
     def seed(self):
         path = 'quizzes'
         for filename in os.listdir(path):

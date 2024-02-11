@@ -54,7 +54,7 @@ def get_google_provider_cfg():
 @login_manager.unauthorized_handler
 def unauthorized():
     # Redirect to login
-    return redirect("/login")
+    return redirect("/")
 
 # Google login logic
 @app.route("/login")
@@ -132,7 +132,9 @@ def callback():
     # Begin user session by logging the user in
     login_user(user, remember=True)
     url = request.cookies.get('redirect_url') 
-    return redirect(url)
+    resp = make_response(make_response(redirect(url)))
+    resp.delete_cookie('redirect_url') 
+    return resp
 
 
 # Other routes

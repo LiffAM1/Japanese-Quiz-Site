@@ -15,6 +15,7 @@ class User:
         self.count_quizzes = count_quizzes
         self.is_active = is_active
         self.is_authenticated = is_authenticated
+        self.is_anonymous = False
 
     def get_id(self):
         return self.id
@@ -94,11 +95,11 @@ class QuizQuestion:
     def get_question(self, question_language: str):
         match question_language:
             case 'english':
-                return ' or '.join(self.english)
+                return '/'.join(self.english)
             case 'romanji':
-                return ' or '.join(self.romanji)
+                return '/'.join(self.romanji)
             case 'hiragana':
-                return ' or '.join(self.hiragana)
+                return '/'.join(self.hiragana)
             case _:
                 return None
 
