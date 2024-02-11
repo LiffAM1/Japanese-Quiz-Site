@@ -17,13 +17,13 @@
         },
         {
             "id": 3,
-            "english": ["I am ___ ___"],
+            "english": ["I am ___ ___", "I'm ___ ___"],
             "romanji": ["Watashi wa ___ ___ desu"],
             "hiragana": ["わたし は ___ ___ です"]
         },
         {
             "id": 4,
-            "english": ["I am American"],
+            "english": ["I am American", "I'm American"],
             "romanji": ["Amerika jin desu"],
             "hiragana": ["あめりか じん です"]
         },

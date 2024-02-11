@@ -22,7 +22,8 @@ class QuizUtils:
     def format_question_answer(string):
         string = string.lower()
 
-        strings_to_replace = ["_", "(beginning)", "(end)"]
+        # Ignores all spaces, punctuation, etc so we don't grade on dumb differences
+        strings_to_replace = ["'", ",", ".", "!", "?", " ", '"','\\"', "_", "。", "(beginning)", "(end)"]
         for s in strings_to_replace:
             string = string.replace(s,"")
         return string.strip()

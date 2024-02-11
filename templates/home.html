@@ -49,8 +49,7 @@
                             <tr>
                             <th scope="col">Title</th>
                             <th scope="col">Level</th>
-                            <th scope="col">From</th>
-                            <th scope="col">To</th>
+                            <th scope="col">Questions</th>
                             <th scope="col"></th>
                             </tr>
                         </thead>
@@ -59,26 +58,11 @@
                             <tr>
                             <th scope="row">{{quiz.title}}</th>
                             <td>{{quiz.level}}</td>
+                            <td>{{quiz.questions|length}}</td>
                             {% if user_logged_in %}
-                            <td>
-                                <select class="form-select" id="questionLanguage-{{quiz.id}}">
-                                    <option value="english" selected>English</option>
-                                    <option value="romanji">Romanji</option>
-                                    <option value="hiragana">Hiragana</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select class="form-select" id="answerLanguage-{{quiz.id}}">
-                                    <option value="english">English</option>
-                                    <option value="romanji">Romanji</option>
-                                    <option value="hiragana" selected>Hiragana</option>
-                                </select>
-                            </td>
-                            <td><button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="launchQuiz('{{quiz.link}}','{{quiz.id}}')">Start</button></td>
+                            <td><button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="showModal('{{quiz.title}}', '{{quiz.id}}')">Launch</button></td>
                             {% else %}
-                            <td title="Please log in to take quizzes!">-</td>
-                            <td title="Please log in to take quizzes!">-</td>
-                            <td><a class="btn btn-secondary" href="{{base_url}}/login" role="button" onclick="$('#loginToast').toast('show');">Log In</a></td>
+                            <td><button type="button" class="btn btn-secondary" disabled="true" title="Please log in to take quizzes!">Launch</button></td>
                             {% endif %}
                             </tr>
                             {% endfor %}
@@ -88,19 +72,70 @@
             </div>
         </div>
     </main>
+    <div class="modal" tabindex="-1" id="languageModal">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"></h5>
+            </div>
+            <div class="modal-body">
+            <div class="card">
+                <div class="card-body p-4">
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>Question Language:</b>
+                            <select class="form-select" id="questionLanguage">
+                                <option value="english" selected>English</option>
+                                <option value="romanji">Romanji</option>
+                                <option value="hiragana">Hiragana</option>
+                            </select>
+                        </li>
+                        <li class="list-group-item"><b>Answer Langauge:</b>
+                            <select class="form-select" id="answerLanguage">
+                                <option value="english" selected>English</option>
+                                <option value="romanji">Romanji</option>
+                                <option value="hiragana">Hiragana</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="takeQuizBtn" onClick="launchQuiz()">Start Quiz</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancel"></button>
+            </div>
+        </div>
+        </div>
+    </div>
 </body>
 {{foot|safe}}
 
 <script>
- function launchQuiz(quiz_link, quiz_id) {
-    var ql = (document.getElementById('questionLanguage-' + quiz_id)).value;
-    var al = (document.getElementById('answerLanguage-' + quiz_id)).value;
-    if (ql == al) {
-        alert("Please select different question and answer languages!")
+    var base_url = "{{base_url | safe}}";
+
+    function showModal(quiz_title, quiz_id) {
+        var modalTitle = (document.getElementById("modalTitle"));
+        modalTitle.innerHTML = quiz_title;
+        var queryParams = new URLSearchParams(window.location.search);
+        queryParams.set("quiz_id", quiz_id);
+        history.replaceState(null, null, "?"+queryParams.toString());
+
+        $('#languageModal').modal('show'); 
     }
-    else {
-        window.location = `${quiz_link}?question_language=${ql}&answer_language=${al}`;
+
+    function launchQuiz() {
+        let params = (new URL(document.location)).searchParams;
+        let quiz_id = params.get("quiz_id");
+
+        var ql = (document.getElementById('questionLanguage')).value;
+        var al = (document.getElementById('answerLanguage')).value;
+        if (ql == al) {
+            alert("Please select different question and answer languages!")
+        }
+        else {
+            let quiz_link = `${base_url}/quiz/${quiz_id}?question_language=${ql}&answer_language=${al}`
+            window.location = quiz_link;
+        }
     }
- }
 </script>
 </html>

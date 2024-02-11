@@ -23,13 +23,13 @@
         },
         {
             "id": 4,
-            "english": ["Goodbye"],
+            "english": ["Goodbye", "Bye"],
             "romanji": ["Sayounara"],
             "hiragana": ["さようなら"]
         },
         {
             "id": 5,
-            "english": ["Thank you very much"],
+            "english": ["Thank you very much", "Thank you"],
             "romanji": ["Arigatou gozaimasu"],
             "hiragana": ["ありがとう ございます"]
         },
@@ -41,7 +41,7 @@
         },
         {
             "id": 7,
-            "english": ["Excuse me", "Pardon me"],
+            "english": ["Excuse me", "Pardon me", "I'm sorry"],
             "romanji": ["Sumimasen"],
             "hiragana": ["すみません"]
         },
@@ -53,7 +53,7 @@
         },
         {
             "id": 9,
-            "english": ["No problem"],
+            "english": ["No problem", "No"],
             "romanji": ["Iie"],
             "hiragana": ["いいえ"]
         }
