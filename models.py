@@ -7,13 +7,11 @@ from flask_login import UserMixin
 BASE_URL = os.environ.get("BASE_URL", None)
 
 class User(UserMixin):
-    def __init__(self, id: str, name: str, display_name: str, email: str, average_score: float, count_quizzes: int, is_active: bool, is_authenticated: bool):
+    def __init__(self, id: str, name: str, display_name: str, email: str, is_active: bool, is_authenticated: bool):
         self.id = id
         self.name = name
         self.email = email
         self.display_name = display_name
-        self.average_score = average_score
-        self.count_quizzes = count_quizzes
         self.is_active = is_active
         self.is_authenticated = is_authenticated
         self.is_anonymous = False
@@ -32,15 +30,23 @@ class User(UserMixin):
     
     @staticmethod
     def from_dict(dict: dict):
-        return User(dict['id'], dict['name'], dict['display_name'], dict['email'], dict['average_score'], \
-            dict['count_quizzes'], dict['is_active'], dict['is_authenticated'])
+        return User(dict['id'], dict['name'], dict['display_name'], dict['email'], dict['is_active'], dict['is_authenticated'])
 
     def to_dict(self):
         return self.__dict__
 
-    def to_display_dict(self):
+    def to_display_dict(self, attempts):
         user = self.to_dict()
-        user['average_score'] = MiscUtils.format_percent(self.average_score)
+        if len(attempts) == 0:
+            user['average_score'] = MiscUtils.format_percent(0)
+            user['average_score_float'] = 0
+            user['count_quizzes'] = 0
+            return user
+
+        quiz_scores = sum([a.score for a in attempts])
+        user['average_score'] = MiscUtils.format_percent(quiz_scores/(len(attempts)))
+        user['average_score_float'] = quiz_scores/(len(attempts))
+        user['count_quizzes'] = len(attempts)
         return user
 
 class Quiz:

@@ -131,7 +131,7 @@ def callback():
 
     user = users_repo.get(unique_id)
     if not user:
-        user = User(id=unique_id, name=users_name, display_name=users_name, email=users_email, is_active=True, is_authenticated=True, average_score=0, count_quizzes=0)
+        user = User(id=unique_id, name=users_name, display_name=users_name, email=users_email, is_active=True, is_authenticated=True)
         users_repo.save(user)
     else:
         users_repo.set_active(user.id)
@@ -148,15 +148,14 @@ def callback():
 # Other routes
 @app.route("/")
 def home():
-    def format_leaderboard(leaderboard):
-        for u in leaderboard:
-            av_score = leaderboard[u].average_score
-            leaderboard[u].average_score = MiscUtils.format_percent(av_score)
-        return leaderboard 
+    def get_formatted_user(u):
+        user_quizzes = quiz_attempts_repo.get_all_for_user(u.id)
+        return u.to_display_dict(user_quizzes)
 
     all_users = users_repo.get_all()
+    formatted_users = [get_formatted_user(u) for u in all_users]
     # Only calculate leaderboard for users who have taken a quiz before
-    quiz_users = list(filter(lambda u: u.count_quizzes > 0, all_users))
+    quiz_users = list(filter(lambda u: u['count_quizzes'] > 0, formatted_users))
     leaderboard = QuizUtils.calculate_leaderboard(quiz_users)
 
     quizzes = quizzes_repo.get_all()
@@ -164,7 +163,7 @@ def home():
     if user_logged_in:
         confirm_login()
 
-    return render_template('home.html', base_url=BASE_URL, user_logged_in=user_logged_in, ranks=list(format_leaderboard(leaderboard).values()), quizzes=quizzes, nav=get_nav(), head=get_head(), foot=get_foot())
+    return render_template('home.html', base_url=BASE_URL, user_logged_in=user_logged_in, ranks=list(leaderboard.values()), quizzes=quizzes, nav=get_nav(), head=get_head(), foot=get_foot())
 
 @app.route("/user/profile")
 @login_required
@@ -172,7 +171,7 @@ def user_profile():
     user = load_user(current_user.id)
     confirm_login()
     attempts = quiz_attempts_repo.get_all_for_user(user.id)
-    return render_template('profile.html', user=user.to_display_dict(), attempts=[a.to_display_dict() for a in attempts], base_url=BASE_URL, nav=get_nav(), head=get_head(), foot=get_foot())
+    return render_template('profile.html', user=user.to_display_dict(attempts), attempts=[a.to_display_dict() for a in attempts], base_url=BASE_URL, nav=get_nav(), head=get_head(), foot=get_foot())
 
 @app.route("/quiz/<quiz_id>")
 @login_required
@@ -222,11 +221,6 @@ def quiz_submit(quiz_id):
 
         # Score quiz
         attempt = QuizUtils.score(user, quiz, data)
-
-        # User updates
-        user.average_score = ((user.average_score * (user.count_quizzes)) + attempt.score)/(user.count_quizzes + 1)
-        user.count_quizzes = user.count_quizzes + 1
-        users_repo.save(user)
         quiz_attempts_repo.save(attempt)
 
         # Commit the changes and return

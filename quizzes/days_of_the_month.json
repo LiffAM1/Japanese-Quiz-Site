@@ -5,187 +5,187 @@
     "questions": [
         {
             "id": 1,
-            "english": ["First", "1st"],
+            "english": ["First", "1st", "1"],
             "romanji": ["Tsuitachi"],
             "hiragana": ["ついたち"]
         },
         {
             "id": 2,
-            "english": ["Second", "2nd"],
+            "english": ["Second", "2nd", "2"],
             "romanji": ["Futsuka"],
             "hiragana": ["ふつか"]
         },
         {
             "id": 3,
-            "english": ["Third", "3rd"],
+            "english": ["Third", "3rd", "3"],
             "romanji": ["Mikka"],
             "hiragana": ["みっか"]
         },
         {
             "id": 4,
-            "english": ["Fourth", "4th"],
+            "english": ["Fourth", "4th", "4"],
             "romanji": ["Yokka"],
             "hiragana": ["よっか"]
         },
         {
             "id": 5,
-            "english": ["Fifth", "5th"],
+            "english": ["Fifth", "5th", "5"],
             "romanji": ["Itsuka"],
             "hiragana": ["いつか"]
         },
         {
             "id": 6,
-            "english": ["Sixth", "6th"],
+            "english": ["Sixth", "6th", "6"],
             "romanji": ["Muika"],
             "hiragana": ["むいか"]
         },
         {
             "id": 7,
-            "english": ["Seventh", "7th"],
+            "english": ["Seventh", "7th", "7"],
             "romanji": ["Nanoka"],
             "hiragana": ["なのか"]
         },
         {
             "id": 8,
-            "english": ["Eigth", "8th"],
+            "english": ["Eigth", "8th", "8"],
             "romanji": ["Youka"],
             "hiragana": ["ようか"]
         },
         {
             "id": 9,
-            "english": ["Ninth", "9th"],
+            "english": ["Ninth", "9th", "9"],
             "romanji": ["Kokonoka"],
             "hiragana": ["ここのか"]
         },
         {
             "id": 10,
-            "english": ["Tenth", "10th"],
+            "english": ["Tenth", "10th", "10"],
             "romanji": ["Tooka"],
             "hiragana": ["とおか"]
         },
         {
             "id": 11,
-            "english": ["Eleventh", "11th"],
+            "english": ["Eleventh", "11th", "11"],
             "romanji": ["Jyuuichi nichi"],
             "hiragana": ["じゅういち にち"]
         },
         {
             "id": 12,
-            "english": ["Twelfth", "12th"],
+            "english": ["Twelfth", "12th", "12"],
             "romanji": ["Jyuuni nichi"],
             "hiragana": ["じゅうに にち"]
         },
         {
             "id": 13,
-            "english": ["Thirteenth", "13th"],
+            "english": ["Thirteenth", "13th", "13"],
             "romanji": ["Jyuusan nichi"],
             "hiragana": ["じゅうさん にち"]
         },
         {
             "id": 14,
-            "english": ["Fourteenth", "14th"],
+            "english": ["Fourteenth", "14th", "14"],
             "romanji": ["Jyuuyokka"],
             "hiragana": ["じゅうよっか"]
         },
         {
             "id": 15,
-            "english": ["Fifteenth", "15th"],
+            "english": ["Fifteenth", "15th", "15"],
             "romanji": ["Jyuugo nichi"],
             "hiragana": ["じゅうご にち"]
         },
         {
             "id": 16,
-            "english": ["Sixteenth", "16th"],
+            "english": ["Sixteenth", "16th", "16"],
             "romanji": ["Jyuuroku nichi"],
             "hiragana": ["じゅうろく にち"]
         },
         {
             "id": 17,
-            "english": ["Seventeenth", "17th"],
+            "english": ["Seventeenth", "17th", "17"],
             "romanji": ["Jyuushichi nichi", "Jyuunana nichi"],
             "hiragana": ["じゅうしち にち","じゅうなな にち"]
         },
         {
             "id": 18,
-            "english": ["Eighteenth", "18th"],
+            "english": ["Eighteenth", "18th", "18"],
             "romanji": ["Jyuuhachi nichi"],
-            "hiragana": ["じゅうはち にちじゅうに がつ"]
+            "hiragana": ["じゅうはち にち"]
         },
         {
             "id": 19,
-            "english": ["Nineteenth", "19th"],
+            "english": ["Nineteenth", "19th", "19"],
             "romanji": ["Jyuuku nichi", "Jyuukyuu nichi"],
             "hiragana": ["じゅうく にち","じゅうきゅう にち"]
         },
         {
             "id": 20,
-            "english": ["Twentieth", "20th"],
+            "english": ["Twentieth", "20th", "20"],
             "romanji": ["Hatsuka"],
             "hiragana": ["はつか"]
         },
         {
             "id": 21,
-            "english": ["Twenty-first", "21st"],
+            "english": ["Twenty-first", "21st", "21"],
             "romanji": ["Nijyuuichi nichi"],
             "hiragana": ["にじゅういち にち"]
         },
         {
             "id": 22,
-            "english": ["Twenty-second", "22nd"],
+            "english": ["Twenty-second", "22nd", "22"],
             "romanji": ["Nijyuuni nichi"],
             "hiragana": ["にじゅうに にち"]
         },
         {
             "id": 23,
-            "english": ["Twenty-third", "23rd"],
+            "english": ["Twenty-third", "23rd", "23"],
             "romanji": ["Nijyuusan nichi"],
             "hiragana": ["にじゅうさん にち"]
         },
         {
             "id": 24,
-            "english": ["Twenty-fourth", "24th"],
+            "english": ["Twenty-fourth", "24th", "24"],
             "romanji": ["Nijyuuyokka"],
             "hiragana": ["にじゅうよっか"]
         },
         {
             "id": 25,
-            "english": ["Twenty-fifth", "25th"],
+            "english": ["Twenty-fifth", "25th", "25"],
             "romanji": ["Nijyuugo nichi"],
             "hiragana": ["にじゅうご にち"]
         },
         {
             "id": 26,
-            "english": ["Twenty-sixth", "26th"],
+            "english": ["Twenty-sixth", "26th", "26"],
             "romanji": ["Nijyuuroku nichi"],
             "hiragana": ["にじゅうろく にち"]
         },
         {
             "id": 27,
-            "english": ["Twenty-seventh", "27th"],
+            "english": ["Twenty-seventh", "27th", "27"],
             "romanji": ["Nijyuushichi nichi", "Nijyuunana nichi"],
             "hiragana": ["にじゅうしち にち","にじゅうなな にち"]
         },
         {
             "id": 28,
-            "english": ["Twenty-eigth", "28th"],
+            "english": ["Twenty-eigth", "28th", "28"],
             "romanji": ["Nijyuuhachi nichi"],
             "hiragana": ["にじゅうはち にち"]
         },
         {
             "id": 29,
-            "english": ["Twenty-ninth", "29th"],
+            "english": ["Twenty-ninth", "29th", "29"],
             "romanji": ["Nijyuuku nichi", "Nijyuukyuu nichi"],
             "hiragana": ["にじゅうく にち","にじゅうきゅう にち"]
         },
         {
             "id": 30,
-            "english": ["Thirtieth", "30th"],
+            "english": ["Thirtieth", "30th", "30"],
             "romanji": ["Sanjyuu nichi"],
             "hiragana": ["さんじゅう にち"]
         },
         {
             "id": 31,
-            "english": ["Thirty-first", "31st"],
+            "english": ["Thirty-first", "31st", "31"],
             "romanji": ["Sanjyuuichi nichi"],
             "hiragana": ["さんじゅういち にち"]
         }

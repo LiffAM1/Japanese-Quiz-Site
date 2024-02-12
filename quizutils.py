@@ -31,18 +31,8 @@ class QuizUtils:
         return string.strip()
 
     @staticmethod
-    def calculate_average_score(user, results):
-        total_count = user.count_quizzes + 1
-        return ((user.average_score * user.count_quizzes) + results.score)/total_count
-
-    @staticmethod
-    def calculate_leaderboard(users):
-        place = 0
-        users.sort(key=lambda u: u.average_score*u.count_quizzes, reverse=True)
+    def calculate_leaderboard(formatted_users):
+        formatted_users.sort(key=lambda u: u['average_score_float']*u['count_quizzes'], reverse=True)
         leaderboard_results = \
-            {u.id: LeaderboardRank(i, u.id, u.display_name, u.count_quizzes, u.average_score) for i, u in enumerate(users, 1)}
+            {u['id']: LeaderboardRank(i, u['id'], u['display_name'], u['count_quizzes'], u['average_score']) for i, u in enumerate(formatted_users, 1)}
         return leaderboard_results
-
-    @staticmethod
-    def format_percent(n):
-        return "{:.2f}%".format(n*100)
